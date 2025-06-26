@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(0deg, #153677, #4e085f);
+}
+
+.container{
+    height: 100vh;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.heading-cont{
+    min-width: 65vh;
+    min-height: 24vh;
+    padding: 4px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.75em;
+
+    border: 12px ridge black;
+    background: linear-gradient(to top right, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+}
+
+.todo-txt{
+    font-size: 3em;
+    color: rgb(33, 28, 163);
+    padding: 4px;;
+    display: inline-block;
+    text-shadow: 1px 1px black;
+}
+
+.img-ctrl{
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+
+    border: 1px solid black;
+    float: right;
+}
