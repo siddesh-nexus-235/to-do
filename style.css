@@ -135,6 +135,16 @@ input[type="text"]{
 
   animation: fadeIn 0.3s ease-out;
   transition: all 0.3s ease;
+
+  cursor: grab;
+}
+
+.task-item:active{
+    cursor: grabbing;
+}
+
+.task-text{ 
+    cursor: text;
 }
 
 @keyframes fadeIn{
@@ -190,3 +200,11 @@ input[type="text"]{
     cursor: pointer;
 }
 
+.sortable-ghost {
+    opacity: 0.3;
+    background-color: #ccc;
+}
+
+li{
+    list-style-type: none;
+}

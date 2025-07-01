@@ -8,10 +8,10 @@ let undoTimeout = null;
 addBtn.addEventListener('click', ()=>{
     const task = input.value.trim();
     if (task==="") return;
-
+    
     const taskDiv = document.createElement("div");
     taskDiv.classList.add('task-item');
-
+    
     const tickBtn = document.createElement("button");
     tickBtn.innerHTML = "✔️";
     tickBtn.className = "tick-btn";
@@ -19,7 +19,14 @@ addBtn.addEventListener('click', ()=>{
     const taskText = document.createElement("span");
     taskText.textContent = task;
     taskText.className = "task-text";
-
+    
+    taskText.addEventListener("dblclick", () => {
+        const newText = prompt("Edit task:", taskText.textContent);
+        if (newText !== null && newText.trim() !== ""){
+            taskText.textContent = newText.trim();
+            saveTasksToLocal();
+        }
+    });
     
     const timerSpan = document.createElement("span");
     timerSpan.className = "task-timer";
@@ -65,7 +72,9 @@ addBtn.addEventListener('click', ()=>{
     taskDiv.appendChild(taskText);
     taskDiv.appendChild(timerWrapper);
     taskDiv.appendChild(deleteBtn);
-    taskList.appendChild(taskDiv);
+    const li = document.createElement("li");
+    li.appendChild(taskDiv);
+    taskList.appendChild(li);
     
     input.value = "";
 
@@ -77,8 +86,9 @@ addBtn.addEventListener('click', ()=>{
 
     
     deleteBtn.addEventListener('click', ()=> {
-        lastDeleted = taskDiv;
-        taskDiv.remove();
+        const li = taskDiv.parentElement;
+        lastDeleted = li;
+        li.remove();
         
         const undoCont = document.getElementById("undo-container");
         undoCont.style.display = "block";
@@ -145,3 +155,19 @@ window.addEventListener("load", () => {
         });
     }
 });
+
+
+input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter"){
+        addBtn.click();
+    }
+});
+
+new Sortable(document.getElementById("task-list"),{
+    animation: 150,
+    ghostClass: 'sortable-ghost',
+    onEnd: () => {
+        saveTasksToLocal();
+    }
+});
+
